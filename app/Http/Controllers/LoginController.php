@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\GoogleLoginService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -10,12 +11,19 @@ use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
+    protected $googleLoginService;
+
+    public function __construct(GoogleLoginService $googleLoginService)
+    {
+        $this->googleLoginService = $googleLoginService;
+    }
+
     /**
      * Display the user's profile form.
      */
     public function redirectToProvider(Request $request)
     {
-        dd(Socialite::driver('github'));
+        dd(Socialite::driver('github')->redirect());
         return Socialite::driver('github')->redirect();
     }
 
@@ -47,6 +55,18 @@ class LoginController extends Controller
 
         Auth::login($user);
 
+        return redirect('/dashboard');
+    }
+
+    public function redirectToGoogle()
+    {
+        return $this->googleLoginService->redirectToGoogle();
+    }
+
+    public function handleGoogleCallback()
+    {
+        $user = $this->googleLoginService->handleGoogleCallback();
+        Auth::login($user);
         return redirect('/dashboard');
     }
 }

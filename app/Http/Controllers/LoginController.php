@@ -15,7 +15,7 @@ class LoginController extends Controller
      */
     public function redirectToProvider(Request $request)
     {
-        //dd(Socialite::driver('github'));
+        dd(Socialite::driver('github'));
         return Socialite::driver('github')->redirect();
     }
 

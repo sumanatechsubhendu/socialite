@@ -84,7 +84,13 @@ const submit = () => {
                 >
                     Forgot your password?
                 </Link>
-
+                <Link
+                    :href="route('login.github')"
+                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    Login Using Github
+                </Link>
+                <a href="{{ route('login.google') }}">Login with Google</a>
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in
                 </PrimaryButton>

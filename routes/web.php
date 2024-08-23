@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -36,3 +37,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/login/github', [LoginController::class, 'redirectToProvider'])->name('login.github');
+Route::get('/login/github/callback', [LoginController::class, 'handleProviderCallback'])->name('login.github.callback');
+
+Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);

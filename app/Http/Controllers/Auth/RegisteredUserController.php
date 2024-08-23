@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendRegistrationEmail;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -43,7 +45,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+       // event(new Registered($user));
+        // Dispatch the event
+        //event(new UserRegistered($user));
+        // Dispatch the job
+        dispatch(new SendRegistrationEmail($user));
 
         Auth::login($user);
 

@@ -36,5 +36,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/polymorphic-data', [DemoController::class, 'index'])->name('polymorphic.data');
-Route::get('/polymorphic-details', [DemoController::class, 'details'])->name('polymorphic.details');
+Route::get('/polymorphic-view', [DemoController::class, 'details'])->name('polymorphic.data');
 require __DIR__.'/auth.php';

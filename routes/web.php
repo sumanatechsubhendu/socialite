@@ -40,3 +40,6 @@ require __DIR__.'/auth.php';
 
 Route::get('/login/github', [LoginController::class, 'redirectToProvider'])->name('login.github');
 Route::get('/login/github/callback', [LoginController::class, 'handleProviderCallback'])->name('login.github.callback');
+
+Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
